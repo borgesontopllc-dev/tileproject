@@ -1,10 +1,3 @@
-pip freeze > requirements.txt
-services:
-  - type: web
-    name: tile-manager
-    env: python
-    buildCommand: ""
-    startCommand: "python app.py"
-    envVars:
-      - key: FLASK_ENV
-        value: production
+git add requirements.txt
+git commit -m "Add requirements.txt with dependencies"
+git push
