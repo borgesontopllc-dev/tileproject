@@ -1,0 +1,28 @@
+<!-- templates/dashboard.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Projects</h2>
+
+{% if role == 'admin' %}
+<h3>Add New Project</h3>
+<form method="post" action="{{ url_for('add_project') }}">
+    <label>Project Name: <input type="text" name="name" required></label>
+    <label>Location: <input type="text" name="location" required></label>
+    <label>Client: <input type="text" name="client" required></label>
+    <button type="submit">Add Project</button>
+</form>
+{% endif %}
+
+<ul>
+    {% for project in projects %}
+    <li>
+        <a href="{{ url_for('project_detail', project_id=project.id) }}">
+            {{ project.name }} — {{ project.location }} (Client: {{ project.client }})
+        </a>
+    </li>
+    {% else %}
+    <li>No projects found.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

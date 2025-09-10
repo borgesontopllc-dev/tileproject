@@ -1,0 +1,39 @@
+<!-- templates/project_detail.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<h2>{{ project.name }}</h2>
+<p><strong>Location:</strong> {{ project.location }}</p>
+<p><strong>Client:</strong> {{ project.client }}</p>
+
+<h3>Notes</h3>
+<ul>
+    {% for note in project.notes %}
+    <li>{{ note }}</li>
+    {% else %}
+    <li>No notes yet.</li>
+    {% endfor %}
+</ul>
+
+<h3>Photos</h3>
+<div style="display: flex; flex-wrap: wrap; gap: 10px;">
+    {% for photo in project.photos %}
+        <img src="{{ photo }}" alt="Photo" style="width: 200px;">
+    {% else %}
+        <p>No photos yet.</p>
+    {% endfor %}
+</div>
+
+<h3>Add Note or Photo</h3>
+<form method="post" enctype="multipart/form-data">
+    <label>Note:
+        <input type="text" name="note">
+    </label>
+    <label>Photo:
+        <input type="file" name="photo" accept="image/*">
+    </label>
+    <button type="submit">Submit</button>
+</form>
+
+<a href="{{ url_for('dashboard') }}">← Back to Dashboard</a>
+{% endblock %}
